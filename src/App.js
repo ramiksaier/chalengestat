@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import ListItem from './Component/ListItems/ListItems'
+import Additems from './Component/AddItems/AddItems'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state={
+    listitems:["task1","task2"]
+  }
+  handelItem=(item)=>{
+    // this.setState(item(...this.state.listitems))
+    this.setState({listitems:this.state.listitems.concat(item)})
+
+  }
+  handleDelete=(indice)=>{
+this.setState({listitems:this.state.listitems.filter((el,i)=>i!=indice)})
+  }
+  render() {
+    return (
+      <div>
+        <h1>Todo lists</h1>
+        <Additems handelItem={this.handelItem}/>
+        <ListItem listitems={this.state.listitems} handleDelete={this.handleDelete}/>
+
+        
+      </div>
+    )
+  }
 }
-
-export default App;
